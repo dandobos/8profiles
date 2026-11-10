@@ -92,7 +92,7 @@
   .pb-note::placeholder { color: var(--text-subtle); font-style: italic; }
   .pb-name-row { margin: 0 0 14px; text-align: left; }
   .pb-name-row label { display: block; font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--text-primary); margin: 0 0 6px; }
-  .pb-name { width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px; font-family: var(--heading); font-size: 15px; color: var(--text-primary); outline: none; }
+  .pb-name { width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px; font-family: var(--heading); font-size: 16px; color: var(--text-primary); outline: none; }
   .pb-name:focus { border-color: var(--accent); }
   .pb-name-hint { font-family: var(--sans); font-size: 11px; color: var(--text-muted); margin: -8px 0 14px; }
   .intro-title { font-family: var(--heading); font-size: 56px; font-weight: 400; text-align: center; margin: 0 0 24px; letter-spacing: -1px; line-height: 1.05; }
@@ -217,7 +217,7 @@
   .pb-sf-h { font-family: var(--sans); font-size: 13px; font-weight: 700; color: #3a3a3a; margin: 0 0 4px; }
   .pb-sf-b { font-family: var(--sans); font-size: 13px; color: #6b6b6b; margin: 0 0 10px; line-height: 1.5; }
   .pb-sf-row { display: flex; gap: 8px; flex-wrap: wrap; }
-  .pb-sf-input { flex: 1 1 210px; min-width: 0; font-family: var(--sans); font-size: 15px; padding: 11px 13px; border: 1px solid var(--border); border-radius: 9px; background: #fff; color: #0f0f0f; }
+  .pb-sf-input { flex: 1 1 210px; min-width: 0; font-family: var(--sans); font-size: 16px; padding: 11px 13px; border: 1px solid var(--border); border-radius: 9px; background: #fff; color: #0f0f0f; }
   .pb-sf-input:focus { outline: 2px solid #3d7a6e; outline-offset: 1px; }
   .pb-sf-btn { font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; padding: 11px 18px; border-radius: 9px; border: 1px solid #3d7a6e; background: #3d7a6e; color: #fff; min-height: 44px; }
   .pb-sf-btn[disabled] { opacity: .55; cursor: default; }
@@ -1009,3 +1009,6 @@ html.hwt .hwt-bar .lg .rg, #page .hwlp nav.topbar .lg .rg { width: 1.667em !impo
 html.hwt .hwt-bar .nm, #page .hwlp nav.topbar .lg b.nm { margin-bottom: 0 !important; }
 @media (max-width: 520px) { html.hwt .hwt-bar .lg, #page .hwlp nav.topbar .lg { font-size: 20px !important; } }
 @media (max-width: 370px) { html.hwt .hwt-bar .lg, #page .hwlp nav.topbar .lg { font-size: 18px !important; } }
+  /* QA 10 Nov 2026: keyboard focus ring on fields that set outline:none */
+  .pb-note:focus-visible, .pb-name:focus-visible, .pb-sf-input:focus-visible, .activity-input:focus-visible, .rc-a:focus-visible, span.msg:focus-visible { outline: 2px solid #1f5f8b; outline-offset: 2px; }
+  input[type=checkbox]:focus-visible + *, label:has(input[type=checkbox]:focus-visible) { outline: 2px solid #1f5f8b; outline-offset: 2px; border-radius: 999px; }

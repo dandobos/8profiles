@@ -1,4 +1,4 @@
-window.HW_BUILD = 'c2c76ebe5f';
+window.HW_BUILD = '51d8f16a14';
 (function(){
   var POSTHOG_KEY  = 'phc_xaksPnZi9WkQ4uSEJYdeFzS4Kx7Ez6uJTAvSmGE26hey';   // project API key (US)
   var POSTHOG_HOST = 'https://k.dandobos.com';            // managed reverse proxy (dodges ad-blockers); events + /static served via k.dandobos.com -> PostHog US
@@ -415,13 +415,13 @@ function renderQuestion() {
       // Launch QA item 1 (Dan, 22 Oct 2026): say why Continue is disabled. Hidden once all 3 boxes have text.
       + '<p class="hw-req" id="act-name-req"' + (activityNames.every(n=>n.trim())?' hidden':'') + '>Fill in all 3 boxes to continue.</p>';
   } else if (q.type === 'activity_rate') {
-    body = [0,1,2].map(i => '<div class="rate-item"><div class="rate-label">' + esc(activityNames[i] || ('Activity ' + (i+1))) + '</div><div class="rate-likert">' + q.likert.map(l => '<button class="rate-btn ' + (activityScores[i]===l[1]?'selected':'') + '" onclick="updateActivityScore(' + i + ', ' + l[1] + ')">' + l[0] + '</button>').join('') + '</div></div>').join('')
+    body = [0,1,2].map(i => '<div class="rate-item"><div class="rate-label">' + esc(activityNames[i] || ('Activity ' + (i+1))) + '</div><div class="rate-likert" role="group" aria-label="' + esc(activityNames[i] || ('Activity ' + (i+1))) + '">' + q.likert.map(l => '<button class="rate-btn ' + (activityScores[i]===l[1]?'selected':'') + '" aria-pressed="' + (activityScores[i]===l[1]) + '" onclick="updateActivityScore(' + i + ', ' + l[1] + ')">' + l[0] + '</button>').join('') + '</div></div>').join('')
       + '<button class="continue-btn" id="act-rate-btn" onclick="selectActivityScores()" ' + (activityScores.every(s=>s!==null)?'':'disabled') + '>Continue</button>';
   } else if (q.type === 'rank') {
     if (!rankState[qIdx]) rankState[qIdx] = q.items.slice();
     const items = rankState[qIdx];
     const pending = rankConfirmPending[qIdx];
-    body = '<div class="rank-wrap">' + items.map((item, i) => '<div class="rank-row"><div class="rank-num">' + (i+1) + '</div><div class="rank-label">' + item + '</div><div class="rank-controls"><button class="rank-btn" onclick="rankMove(' + i + ', -1)" ' + (i===0?'disabled':'') + '>\u2191</button><button class="rank-btn" onclick="rankMove(' + i + ', 1)" ' + (i===items.length-1?'disabled':'') + '>\u2193</button></div></div>').join('') + '</div>'
+    body = '<div class="rank-wrap">' + items.map((item, i) => '<div class="rank-row"><div class="rank-num">' + (i+1) + '</div><div class="rank-label">' + item + '</div><div class="rank-controls"><button class="rank-btn" aria-label="Move ' + esc(String(item).replace(/<[^>]+>/g,'')) + ' up" onclick="rankMove(' + i + ', -1)" ' + (i===0?'disabled':'') + '>\u2191</button><button class="rank-btn" aria-label="Move ' + esc(String(item).replace(/<[^>]+>/g,'')) + ' down" onclick="rankMove(' + i + ', 1)" ' + (i===items.length-1?'disabled':'') + '>\u2193</button></div></div>').join('') + '</div>'
       + (pending ? '<p class="rank-nudge">You haven\u2019t moved anything. Take a moment, is this really the order for you?</p>' : '')
       + '<button class="continue-btn" onclick="selectRank()">' + (pending ? 'Yes, this is my order' : 'Continue') + '</button>';
   } else if (q.type === 'freetext') {
@@ -984,17 +984,17 @@ function shareLoopHtml(r, s){
       + '<p class="pb-h">' + SHARE_HEADLINE[r.key] + '</p>'
       + '<p class="pb-b">Send the quiz to a friend, post it, or save your card to share anywhere.</p>'
       + '<div class="seg">'
-        + '<button class="seg-btn active" data-m="friend">Send Quiz to a Friend</button>'
-        + '<button class="seg-btn" data-m="socials">Post Quiz to Socials</button>'
-        + '<button class="seg-btn" data-m="save">Save Image for Yourself</button>'
+        + '<button class="seg-btn active" aria-pressed="true" data-m="friend">Send Quiz to a Friend</button>'
+        + '<button class="seg-btn" aria-pressed="false" data-m="socials">Post Quiz to Socials</button>'
+        + '<button class="seg-btn" aria-pressed="false" data-m="save">Save Image for Yourself</button>'
       + '</div>'
       + '<div class="seg-body" data-m="friend">'
         + '<p class="pb-note-label">Add a personal note (optional but helpful!)</p>'
-        + '<textarea class="pb-note" placeholder="Hey. I thought of you when I got my result..." oninput="hwNoteInput(this)"></textarea>'
+        + '<textarea class="pb-note" aria-label="Add a personal note" placeholder="Hey. I thought of you when I got my result..." oninput="hwNoteInput(this)"></textarea>'
         + '<div class="pb-name-row"><label for="pb-name">Your first name</label><input class="pb-name" id="pb-name" maxlength="24" value="' + esc(hwSenderName()) + '" oninput="hwNameInput(this)"></div>'
         + '<label class="pb-privacy"><span class="pb-switch"><input type="checkbox" ' + (_shareShowResult ? 'checked' : '') + ' onchange="hwShareVisToggle(this)"><span class="pb-knob"></span></span>Show my result to the people I share with</label>'
         + '<p class="pb-privacy-note" id="pb-priv-note" style="' + (_shareShowResult ? 'display:none' : '') + '">Your friend does NOT see your result</p>'
-        + '<div class="preview"><span class="quo">“</span><span class="msg" contenteditable="true" role="textbox" spellcheck="true" oninput="viralEditMsg(this)">' + fMsg + '</span><span class="quo">”</span></div>'
+        + '<div class="preview"><span class="quo">“</span><span class="msg" contenteditable="true" role="textbox" aria-label="Your message" spellcheck="true" oninput="viralEditMsg(this)">' + fMsg + '</span><span class="quo">”</span></div>'
         + '<p class="pb-edit-hint">✎ Edit this message before you send it</p>'
         + '<div class="share-btns">'
           + '<button class="sbtn" onclick="viralNativeShare()"><span class="g g-nat">↗</span>Share</button>'
@@ -1219,7 +1219,7 @@ function hwCopyEmail(){
     .catch(function(){ viralToast(msg); });
 }
 function hwEmailShareBtns(e, fMsg, p){
-  var mailto = 'mailto:?body=' + e(fMsg + '\n\n' + p.link);
+  var mailto = 'mailto:?subject=' + e(hwEmailSubject()) + '&body=' + e(fMsg + '\n\n' + p.link);
   if (!hwDesktopMail()){
     return '<a class="sbtn share-em" onclick="hwShareClick(\'email\')" href="' + mailto + '"><span class="g g-em">@</span>Email</a>';
   }
@@ -1359,7 +1359,7 @@ function compareHtml(r, s){
       + '<p class="cmp-summary">' + summary + '</p>'
       + '<div class="cmp-back">'
         + '<p class="cmp-back-h">Send your result back</p>'
-        + '<div class="preview"><span class="quo">&ldquo;</span><span class="msg" contenteditable="true" role="textbox" spellcheck="true" oninput="cmpEditMsg(this)">' + backMsg + '</span><span class="quo">&rdquo;</span></div>'
+        + '<div class="preview"><span class="quo">&ldquo;</span><span class="msg" contenteditable="true" role="textbox" aria-label="Your message" spellcheck="true" oninput="cmpEditMsg(this)">' + backMsg + '</span><span class="quo">&rdquo;</span></div>'
         + '<div class="share-btns">'
           + '<button class="sbtn native" onclick="cmpNativeShare()"><span class="g">↗</span>Share</button>'
           + '<a class="sbtn share-wa" id="cmp-wa" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent(backMsg + ' ' + _cmpBack.link) + '"><span class="g g-wa">w</span>WhatsApp</a>'
@@ -2403,7 +2403,7 @@ document.addEventListener('click', function(e){
   var b = e.target.closest && e.target.closest('.seg-btn'); if(!b) return;
   var box = b.closest('.panelbox'); if(!box) return;
   var m = b.getAttribute('data-m');
-  box.querySelectorAll('.seg-btn').forEach(function(x){ x.classList.toggle('active', x===b); });
+  box.querySelectorAll('.seg-btn').forEach(function(x){ x.classList.toggle('active', x===b); x.setAttribute('aria-pressed', String(x===b)); });
   box.querySelectorAll('.seg-body').forEach(function(x){ x.style.display = (x.getAttribute('data-m')===m)?'block':'none'; });
 });
 // An unfinished quiz saved in durable storage: show the resume gate instead of
