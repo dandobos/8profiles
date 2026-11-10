@@ -1012,3 +1012,9 @@ html.hwt .hwt-bar .nm, #page .hwlp nav.topbar .lg b.nm { margin-bottom: 0 !impor
   /* QA 10 Nov 2026: keyboard focus ring on fields that set outline:none */
   .pb-note:focus-visible, .pb-name:focus-visible, .pb-sf-input:focus-visible, .activity-input:focus-visible, .rc-a:focus-visible, span.msg:focus-visible { outline: 2px solid #1f5f8b; outline-offset: 2px; }
   input[type=checkbox]:focus-visible + *, label:has(input[type=checkbox]:focus-visible) { outline: 2px solid #1f5f8b; outline-offset: 2px; border-radius: 999px; }
+  /* QA rulings 10 Nov 2026: 44px tap areas without changing the look */
+  #page .back-link button { position: relative; }
+  #page .back-link button::after { content: ''; position: absolute; left: -8px; right: -8px; top: -12px; bottom: -12px; }
+  #page .hwlp nav.topbar a.btn { position: relative; }
+  #page .hwlp nav.topbar a.btn::after { content: ''; position: absolute; left: 0; right: 0; top: -6px; bottom: -6px; }
+  @media (max-width: 359px) { #page .hwlp nav.topbar .lg { font-size: 15px !important; } #page .hwlp nav.topbar.topbar a.btn { min-height: 40px; box-sizing: border-box; display: inline-flex; align-items: center; } }

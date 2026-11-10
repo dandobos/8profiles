@@ -20,14 +20,13 @@
   if (!page) return;
 
   function screenMsg(title, body, showCta) {
+    var pb = document.getElementById('progressbar'); if (pb) { pb.style.display = 'none'; pb.setAttribute('aria-hidden', 'true'); }
+    document.documentElement.classList.add('r8err');
     page.innerHTML =
-      '<p class="intro-eyebrow">8 Profiles</p>' +
-      '<h1 class="intro-title">' + title + '</h1>' +
-      '<p class="intro-desc">' + body + '</p>' +
-      (showCta
-        ? '<a class="continue-btn" style="text-decoration:none;display:block;text-align:center;" ' +
-          'href="https://8profiles.com/">Take the quiz</a>'
-        : '');
+      '<a class="r8-logo" href="https://8profiles.com/"><img src="/favicon.svg" alt="" width="34" height="34"><span aria-label="8 Profiles">8 Prof<b class="idot" style="--hw-red:#B23A2E">ı</b>les</span></a>' +
+      '<h1 class="r8-title">' + title + '</h1>' +
+      '<p class="r8-desc">' + body + '</p>' +
+      (showCta ? '<a class="r8-btn" href="https://8profiles.com/">Take the quiz &rarr;</a>' : '');
   }
 
   var token = '';
