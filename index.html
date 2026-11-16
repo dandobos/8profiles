@@ -1987,9 +1987,9 @@ var _share = null;
 // Default share message (Dan's copy, share-flow decision 2, 2026-08-04): leads with the
 // sender's result and the compare promise, then the time claim. The link follows after a
 // blank line (never a bare URL mid-sentence).
-function viralPlainText(){ return "I took the 8 Profiles quiz. I wonder what you'd get? It maps the pattern behind how you choose work, and only takes around 5 minutes."; }
+function viralPlainText(){ return "I took the 8 Profiles Quiz. I wonder what you'd get? It maps the pattern behind how you choose work, and only takes around 5 minutes."; }
 var _shareMsgEdited = false;
-function viralShareText(r){ return 'I got ' + r.archetype.replace(/^The\s+/, '') + " on the 8 Profiles quiz. I wonder what you'd get? It maps the pattern behind how you choose work, and only takes around 5 minutes... then it shows us both side by side at the end."; }
+function viralShareText(r){ return 'I got ' + r.archetype.replace(/^The\s+/, '') + " on the 8 Profiles Quiz. I wonder what you'd get? It maps the pattern behind how you choose work, and only takes around 5 minutes... then it shows us both side by side at the end."; }
 // Per-sharer referral id, computed once. Beta testers get their stable portal token;
 // everyone else a per-share-session random id. Registered as a super property so the
 // sharer's own share_clicked events carry it, and embedded in every share link.
@@ -2299,7 +2299,7 @@ function hwRebuildShareLinks(box){
   var em = box.querySelector('a.share-em');
   if (em) {
     var subj = _shareShowResult && _share.archetype
-      ? 'I got ' + String(_share.archetype).replace(/^The\s+/, '') + ' on the 8 Profiles quiz'
+      ? 'I got ' + String(_share.archetype).replace(/^The\s+/, '') + ' on the 8 Profiles Quiz'
       : 'Try this free 5-minute work quiz';
     em.href = 'mailto:?subject=' + e(subj) + '&body=' + e(t + '\n\n' + dl);
   }
@@ -2326,7 +2326,7 @@ function hwNameInput(el){
 // on the card even if they tap a channel inside the debounce window.
 function hwEmailSubject(){
   return _shareShowResult && _share && _share.archetype
-    ? 'I got ' + String(_share.archetype).replace(/^The\s+/, '') + ' on the 8 Profiles quiz'
+    ? 'I got ' + String(_share.archetype).replace(/^The\s+/, '') + ' on the 8 Profiles Quiz'
     : 'Try this free 5-minute work quiz';
 }
 // Desktop only: a mailto is a bet on the reader's default mail program (Erin's PC
